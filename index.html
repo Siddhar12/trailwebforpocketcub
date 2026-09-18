@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pocket Cub · Pocket money, made simple</title>
-  <meta name="description" content="Pocket Cub is a parent-and-child pocket money app. Give an allowance, set chores with rewards and offer savings that earn interest. No card, no fees.">
+  <title>Pocket Cub · Pocket money that teaches</title>
+  <meta name="description" content="Pocket Cub teaches kids about money with their own pocket money: an allowance, chores that pay, spending choices and savings that earn interest. No card, no fees.">
   <meta name="theme-color" content="#F8F5ED">
-  <meta property="og:title" content="Pocket Cub · Pocket money, made simple">
-  <meta property="og:description" content="Give your kid an allowance, help them save, and see exactly where every dollar goes. No card, no fees.">
+  <meta property="og:title" content="Pocket Cub · Pocket money that teaches">
+  <meta property="og:description" content="Turn your kid’s pocket money into real lessons in earning, spending, saving and interest. No card, no fees.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,6 +51,7 @@
       <ellipse cx="22" cy="33" rx="2.9" ry="3.3" fill="#2D251C"/><ellipse cx="42" cy="33" rx="2.9" ry="3.3" fill="#2D251C"/>
       <ellipse cx="16.5" cy="42" rx="3.8" ry="2.5" fill="#EE8B6F" opacity=".75"/><ellipse cx="47.5" cy="42" rx="3.8" ry="2.5" fill="#EE8B6F" opacity=".75"/>
     </symbol>
+    <symbol id="star" viewBox="0 0 48 48"><path d="M24 4l5.3 12.7 13.7 1.1-10.4 9 3.2 13.4L24 33l-11.8 7.2 3.2-13.4-10.4-9 13.7-1.1z" fill="#E9A23B" stroke="#fff" stroke-width="3.4" stroke-linejoin="round"/><path d="M24 12.5l2.4 6" stroke="#FCE1AE" stroke-width="2.6" stroke-linecap="round"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="3"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></g></symbol>
     <symbol id="i-unlock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="3"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 6.8-1.2"/></g></symbol>
@@ -82,8 +83,8 @@
     <span>Pocket Cub</span>
   </a>
   <nav class="nav__links" aria-label="Main">
+    <a href="#learn">What they learn</a>
     <a href="#how">How it works</a>
-    <a href="#savings">Savings</a>
     <a href="#modes">Kid Mode</a>
     <a href="#safety">Safety</a>
     <a href="#faq">Questions</a>
@@ -97,10 +98,10 @@
 <section class="hero" id="top">
   <div class="hero__head">
     <h1 class="hero__title">
-      <span class="sr">Pocket money, made simple.</span>
-      <span aria-hidden="true"><span class="rise"><span style="--i:0">Pocket</span></span> <span class="rise"><span style="--i:1">money,</span></span><br><span class="rise"><span style="--i:2">made</span></span> <span class="rise"><span style="--i:3" class="amber">simple.</span></span></span>
+      <span class="sr">Pocket money that teaches.</span>
+      <span aria-hidden="true"><span class="rise"><span style="--i:0">Pocket</span></span> <span class="rise"><span style="--i:1">money</span></span><br><span class="rise"><span style="--i:2">that</span></span> <span class="rise"><span style="--i:3" class="amber">teaches.</span></span></span>
     </h1>
-    <p class="hero__sub fade" style="--d:.5s">Give your kid an allowance, help them save, and see exactly where every dollar goes.</p>
+    <p class="hero__sub fade" style="--d:.5s">Turn your kid’s pocket money into real lessons in earning, spending, saving and interest, and see exactly where every dollar goes.</p>
 
     <form class="namer fade" style="--d:.65s" data-namer autocomplete="off">
       <label for="kid-name">Try it for</label>
@@ -172,6 +173,53 @@
   </div>
 </section>
 
+<!-- ================= WHAT THEY LEARN ================= -->
+<section class="learn" id="learn">
+  <div class="learn__grid">
+    <div class="learn__copy">
+      <h2 class="reveal">Real numbers,<br>not lectures.</h2>
+      <p class="reveal" style="--d:.1s">Every tap in Pocket Cub is a small money lesson. Here’s what <b data-name>Meera</b> practises, week after week, with money they can actually see.</p>
+      <p class="learn__age reveal" style="--d:.2s">For kids roughly 5 to 14.</p>
+    </div>
+
+    <div class="rc-wrap">
+      <img class="rc__teacher" src="explainericons/pointing-stick@3x.png" width="96" height="92" alt="">
+      <article class="rc" data-rc aria-label="Money report card">
+        <header class="rc__head">
+          <div class="rc__title"><small>Pocket Cub</small><b>Money report card</b></div>
+          <div class="rc__meta">
+            <span><small>Student</small><b data-name>Meera</b></span>
+            <span><small>Teacher</small><b>Cub</b></span>
+          </div>
+        </header>
+        <div class="rc__cols" aria-hidden="true"><span>Skill</span><span>How they practise</span><span></span></div>
+        <ol class="rc__rows">
+          <li class="rc__row" style="--i:0;--r:-10deg"><span class="rc__subj">Earning</span><span class="rc__how">Ticking off chores for a reward</span><span class="sticker"><svg aria-label="Gold star"><use href="#star"/></svg></span></li>
+          <li class="rc__row" style="--i:1;--r:8deg"><span class="rc__subj">Budgeting</span><span class="rc__how">Making a weekly allowance last the week</span><span class="sticker"><svg aria-label="Gold star"><use href="#star"/></svg></span></li>
+          <li class="rc__row" style="--i:2;--r:-4deg"><span class="rc__subj">Smart spending</span><span class="rc__how">Seeing their balance before and after every buy</span><span class="sticker"><svg aria-label="Gold star"><use href="#star"/></svg></span></li>
+          <li class="rc__row" style="--i:3;--r:14deg"><span class="rc__subj">Saving</span><span class="rc__how">Locking money away for a set number of days</span><span class="sticker"><svg aria-label="Gold star"><use href="#star"/></svg></span></li>
+          <li class="rc__row" style="--i:4;--r:-12deg"><span class="rc__subj">Interest</span><span class="rc__how">Getting it back with more on top, in weeks not years</span><span class="sticker"><svg aria-label="Gold star"><use href="#star"/></svg></span></li>
+          <li class="rc__row" style="--i:5;--r:6deg"><span class="rc__subj">Keeping records</span><span class="rc__how">Seeing every dollar in and out as an entry</span><span class="sticker"><svg aria-label="Gold star"><use href="#star"/></svg></span></li>
+        </ol>
+        <footer class="rc__foot">
+          <div class="rc__comment">
+            <small>Teacher’s comment</small>
+            <p class="rc__note"><span data-name>Meera</span> locked away $10 for 14 days and got $10.50 back. Very patient!</p>
+            <span class="rc__sig">Cub</span>
+          </div>
+          <svg class="rc__seal" viewBox="0 0 100 100" aria-hidden="true">
+            <defs><path id="sealpath" d="M50 50m-37 0a37 37 0 1 1 74 0a37 37 0 1 1-74 0"/></defs>
+            <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="3"/>
+            <circle cx="50" cy="50" r="27" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <g class="rc__ring"><text font-size="10.5" font-weight="900" fill="currentColor"><textPath href="#sealpath" textLength="228" lengthAdjust="spacingAndGlyphs">CUB APPROVED · MONEY SMART ·</textPath></text></g>
+            <text x="50" y="59" text-anchor="middle" font-size="25" font-weight="900" fill="currentColor">A+</text>
+          </svg>
+        </footer>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ================= TOUR ================= -->
 <section class="tour" id="how" data-tour data-mode="parent">
   <div class="tour__pin">
@@ -206,24 +254,24 @@
             <p class="tstep__meta tstep__meta--try">Tap a colour on the phone. Each child gets their own.</p>
           </article>
           <article class="tstep" data-tstep="2">
-            <p class="tstep__n">03</p>
+            <p class="tstep__n">03<span class="lesson"><svg aria-hidden="true"><use href="#star"/></svg>Lesson: ownership</span></p>
             <h2>Hand over the phone</h2>
             <p>Switch to Kid Mode. Your child sees their money, logs what they spend and ticks off their chores.</p>
             <p class="tstep__meta">Kid Mode has its own soft mint look, so it’s always clear whose turn it is.</p>
           </article>
           <article class="tstep" data-tstep="3">
-            <p class="tstep__n">04</p>
+            <p class="tstep__n">04<span class="lesson"><svg aria-hidden="true"><use href="#star"/></svg>Lesson: keeping records</span></p>
             <h2>Every dollar, on the record</h2>
             <p>Set each child’s pocket money and starting balance. Every dollar in and out is recorded as an entry, so there’s always a clear history.</p>
           </article>
           <article class="tstep" data-tstep="4">
-            <p class="tstep__n">05</p>
+            <p class="tstep__n">05<span class="lesson"><svg aria-hidden="true"><use href="#star"/></svg>Lesson: earning</span></p>
             <h2>Chores that pay</h2>
             <p>Give each child chores with a reward: one-off, daily or weekly. When your child marks a chore done, the reward lands in their account straight away.</p>
             <p class="tstep__meta tstep__meta--try">Tap a chore on the phone. Optional reminders nudge them at a time you choose.</p>
           </article>
           <article class="tstep" data-tstep="5">
-            <p class="tstep__n">06</p>
+            <p class="tstep__n">06<span class="lesson"><svg aria-hidden="true"><use href="#star"/></svg>Lesson: smart spending</span></p>
             <h2>Log a spend</h2>
             <p>When your child buys something, they log it themselves and see their balance before and after. Made a mistake? They can undo it right away.</p>
             <p class="tstep__meta tstep__meta--try">Pick something and log it on the phone.</p>
@@ -381,7 +429,7 @@
   <div class="save__wrap">
     <article class="card feat feat--invest reveal" data-invest>
       <div class="feat__copy">
-        <span class="kicker"><svg><use href="#i-jar"/></svg>Investments</span>
+        <span class="kicker"><svg><use href="#i-jar"/></svg>Investments<span class="lesson"><svg aria-hidden="true"><use href="#star"/></svg>Lesson: saving &amp; interest</span></span>
         <h3>Interest kids can actually watch.</h3>
         <p>Create savings “instruments” like a Fixed Deposit or a College Fund. Lock money away for a set number of days at a rate you choose. When the lock ends, it comes back with interest on top.</p>
 
@@ -613,6 +661,8 @@
            sizes="190px" width="112" height="115" alt="Cub holding a chart with an arrow going up">
     </div>
     <div class="thread" data-thread>
+      <div class="msg msg--q"><div class="bubble"><p>What will my child actually learn?</p></div></div>
+      <div class="msg msg--a"><div class="bubble"><p>The basics, by doing them: earning through chores, making an allowance last, thinking before they spend, saving up, and how interest works. They see real numbers every day instead of hearing a lecture.</p></div></div>
       <div class="msg msg--q"><div class="bubble"><p>Is real money moved through the app?</p></div></div>
       <div class="msg msg--a"><div class="bubble"><p>No. Pocket Cub is a shared record between you and your child. You hand over cash or pay as you normally would, and the app keeps track.</p></div></div>
       <div class="msg msg--q"><div class="bubble"><p>Does my child need their own phone?</p></div></div>
@@ -622,7 +672,7 @@
       <div class="msg msg--q"><div class="bubble"><p>Can I have more than one child?</p></div></div>
       <div class="msg msg--a"><div class="bubble"><p>Yes. Add as many as you like, each with their own account.</p></div></div>
       <div class="msg msg--q"><div class="bubble"><p>What age is it for?</p></div></div>
-      <div class="msg msg--a"><div class="bubble"><p>Roughly 5 to 14: kids learning to save, spend and earn with real numbers, not lectures. It works in US dollars and other currencies, and you can sign in with a US (+1) or Indian (+91) number, or Google.</p></div></div>
+      <div class="msg msg--a"><div class="bubble"><p>Roughly 5 to 14. It works in US dollars and other currencies, and you can sign in with a US (+1) or Indian (+91) number, or Google.</p></div></div>
       <div class="msg msg--q"><div class="bubble"><p>Is it free?</p></div></div>
       <div class="msg msg--a"><div class="bubble"><p>Yes. No card and no fees.</p></div></div>
       <div class="msg msg--q"><div class="bubble"><p>Which phones does it work on?</p></div></div>
@@ -677,7 +727,7 @@
     <a href="#" data-todo="terms">Terms of use</a>
     <a href="#" data-todo="delete">Delete your account</a>
   </nav>
-  <p class="foot__c">© <span data-year>2026</span> Pocket Cub. Built India-first.</p>
+  <p class="foot__c">© <span data-year>2026</span> Pocket Cub. Pocket money, made simple. Built India-first.</p>
 </footer>
 
 </body>

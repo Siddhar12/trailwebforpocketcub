@@ -169,7 +169,7 @@
   const sio = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + e.target.id));
   }), { rootMargin: '-45% 0px -50% 0px' });
-  ['how', 'savings', 'modes', 'safety', 'faq'].forEach(id => { const s = document.getElementById(id); if (s) sio.observe(s); });
+  ['learn', 'how', 'modes', 'safety', 'faq'].forEach(id => { const s = document.getElementById(id); if (s) sio.observe(s); });
 
   /* ---------- the kid's name, everywhere ---------- */
   const nameInput = $('[data-name-input]');
@@ -435,7 +435,7 @@
     /* step 4: chores */
     const chores = $$('.a-chore', phone);
     const choreBalEl = $('[data-chorebal]', phone);
-    const choreBal = counter(choreBalEl, 42, dollars);
+    const choreBal = counter(choreBalEl, 42, n => '$' + Math.round(n));
     const toggleChore = async btn => {
       const on = btn.getAttribute('aria-pressed') !== 'true', r = +btn.dataset.reward;
       btn.setAttribute('aria-pressed', on);
@@ -779,6 +779,12 @@
         choose(n.dataset.tab);
       });
     });
+  }
+
+  /* ---------- report card: stars stick on ---------- */
+  const rc = $('[data-rc]');
+  if (rc) {
+    const once = onVisible(rc, v => { if (v) { rc.classList.add('is-in'); once.disconnect(); } }, { threshold: .3 });
   }
 
   /* ---------- trust: stamps slam in ---------- */
