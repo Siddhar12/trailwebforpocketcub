@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pocket Cub · Pocket money, made simple</title>
+  <meta name="description" content="Pocket Cub is a parent-and-child pocket money app. Give an allowance, set chores with rewards and offer savings that earn interest. No card, no fees.">
+  <meta name="theme-color" content="#F8F5ED">
+  <meta property="og:title" content="Pocket Cub · Pocket money, made simple">
+  <meta property="og:description" content="Give your kid an allowance, help them save, and see exactly where every dollar goes. No card, no fees.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400..900;1,500..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    // "rm" = the visitor asked their OS for reduced motion. We keep the site moving but drop big swoops.
+    // Add ?motion=full to the URL to preview everything regardless.
+    (function (d) {
+      d.classList.add('js');
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches && !/[?&]motion=full(&|$)/.test(location.search)) d.classList.add('rm');
+    })(document.documentElement);
+  </script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="coin" viewBox="0 0 48 48">
+      <circle cx="24" cy="25" r="22" fill="#9A5518"/>
+      <circle cx="24" cy="23" r="21" fill="#D98B3A"/>
+      <circle cx="24" cy="23" r="16" fill="#E6A256" stroke="#C47427" stroke-width="1.6"/>
+      <path d="M29 16.6c-1.2-1.6-3-2.4-5-2.4-3 0-5 1.6-5 3.9s2 3.4 5 4.1 5.4 1.8 5.4 4.4-2.3 4.3-5.4 4.3c-2.3 0-4.3-.9-5.6-2.6M24 11.2v23.6" fill="none" stroke="#8E4E16" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9.6 17.5a15.5 15.5 0 0 1 8.6-8.2" stroke="#FCE6C6" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".85"/>
+    </symbol>
+    <symbol id="coin-green" viewBox="0 0 48 48">
+      <circle cx="24" cy="25" r="22" fill="#1E5530"/>
+      <circle cx="24" cy="23" r="21" fill="#3A8A53"/>
+      <circle cx="24" cy="23" r="16" fill="#58A870" stroke="#2F7A45" stroke-width="1.6"/>
+      <path d="M24 15v16M16 23h16" fill="none" stroke="#1E5530" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="cub" viewBox="0 0 64 64">
+      <circle cx="14" cy="17" r="10" fill="#A9653A"/><circle cx="50" cy="17" r="10" fill="#A9653A"/>
+      <circle cx="14" cy="17" r="5.2" fill="#F4DEC4"/><circle cx="50" cy="17" r="5.2" fill="#F4DEC4"/>
+      <ellipse cx="32" cy="36" rx="25" ry="23" fill="#B06D3E"/>
+      <ellipse cx="32" cy="29" rx="17" ry="11" fill="#BC7A48" opacity=".55"/>
+      <ellipse cx="32" cy="44" rx="11" ry="8.5" fill="#F4DEC4"/>
+      <ellipse cx="32" cy="40.5" rx="4" ry="2.8" fill="#2D251C"/>
+      <path d="M29 45.2q3 2.8 6 0" stroke="#2D251C" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+      <ellipse cx="22" cy="33" rx="2.9" ry="3.3" fill="#2D251C"/><ellipse cx="42" cy="33" rx="2.9" ry="3.3" fill="#2D251C"/>
+      <ellipse cx="16.5" cy="42" rx="3.8" ry="2.5" fill="#EE8B6F" opacity=".75"/><ellipse cx="47.5" cy="42" rx="3.8" ry="2.5" fill="#EE8B6F" opacity=".75"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="3"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></g></symbol>
+    <symbol id="i-unlock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="3"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 6.8-1.2"/></g></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></g></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8.5h14l-1.1 11a1.5 1.5 0 0 1-1.5 1.4H7.6a1.5 1.5 0 0 1-1.5-1.4z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></g></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></g></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9.5 7H20M9.5 12H20M9.5 17H20"/><path d="M4.5 7h.5M4.5 12h.5M4.5 17h.5" stroke-width="2.8"/></g></symbol>
+    <symbol id="i-jar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h8"/><path d="M9 3.5V6.5C6.5 7.5 5 9.5 5 12.5v5.5a2.5 2.5 0 0 0 2.5 2.5h9a2.5 2.5 0 0 0 2.5-2.5v-5.5c0-3-1.5-5-4-6V3.5"/><path d="M9.5 14.5h5"/></g></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="16.8" cy="9" r="2.5"/><path d="M16 14.3c2.6-.2 4.3 1.6 4.7 4.4"/></g></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M6.2 3.3c-.7-.4-1.4.1-1.4.9v15.6c0 .8.7 1.3 1.4.9l13.4-7.8c.7-.4.7-1.4 0-1.8z" fill="currentColor"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></g></symbol>
+    <symbol id="i-del" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-6-7z"/><path d="M12 9.5l5 5M17 9.5l-5 5"/></g></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ff" viewBox="0 0 24 24"><path d="M3.5 6.3v11.4c0 .8.9 1.2 1.5.7l6.6-5.7c.4-.4.4-1 0-1.4L5 5.6c-.6-.5-1.5-.1-1.5.7zm9 0v11.4c0 .8.9 1.2 1.5.7l6.6-5.7c.4-.4.4-1 0-1.4L14 5.6c-.6-.5-1.5-.1-1.5.7z" fill="currentColor"/></symbol>
+    <symbol id="scribble" viewBox="0 0 120 60"><path d="M4 50C24 54 70 52 96 28c6-6 10-14 12-22M108 6l-10 3M108 6l1 11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" data-nav>
+  <a href="#top" class="brand" aria-label="Pocket Cub, back to top">
+    <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#cub"/></svg>
+    <span>Pocket Cub</span>
+  </a>
+  <nav class="nav__links" aria-label="Main">
+    <a href="#how">How it works</a>
+    <a href="#savings">Savings</a>
+    <a href="#modes">Kid Mode</a>
+    <a href="#safety">Safety</a>
+    <a href="#faq">Questions</a>
+  </nav>
+  <a class="btn btn--dark btn--sm" data-play href="#"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg>Get the app</a>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero__head">
+    <h1 class="hero__title">
+      <span class="sr">Pocket money, made simple.</span>
+      <span aria-hidden="true"><span class="rise"><span style="--i:0">Pocket</span></span> <span class="rise"><span style="--i:1">money,</span></span><br><span class="rise"><span style="--i:2">made</span></span> <span class="rise"><span style="--i:3" class="amber">simple.</span></span></span>
+    </h1>
+    <p class="hero__sub fade" style="--d:.5s">Give your kid an allowance, help them save, and see exactly where every dollar goes.</p>
+
+    <form class="namer fade" style="--d:.65s" data-namer autocomplete="off">
+      <label for="kid-name">Try it for</label>
+      <span class="namer__field">
+        <input id="kid-name" name="kid" maxlength="14" spellcheck="false" placeholder="your kid" value="Meera" data-name-input>
+        <i class="namer__line"></i>
+      </span>
+      <span class="namer__hint"><svg aria-hidden="true"><use href="#scribble"/></svg>type your child’s name</span>
+    </form>
+
+    <div class="hero__cta fade" style="--d:.8s">
+      <a class="btn btn--play" data-play href="#">
+        <svg class="btn__play" aria-hidden="true"><use href="#i-play"/></svg>
+        <span class="btn__stack"><small>Get it on</small><span>Google Play</span></span>
+      </a>
+      <p class="hero__fine">Pocket money, tracked between you and your child.<br><b>No card, no fees.</b></p>
+    </div>
+  </div>
+
+  <div class="hero__stage" aria-label="Pocket Cub app preview">
+    <img class="hero__cub" src="explainericons/happy@2x.png"
+         srcset="explainericons/happy.png 170w, explainericons/happy@2x.png 340w, explainericons/happy@3x.png 510w"
+         sizes="(max-width: 700px) 130px, 200px" width="170" height="183" alt="">
+    <p class="scrawl scrawl--l"><span>their name, everywhere</span><svg aria-hidden="true"><use href="#scribble"/></svg></p>
+    <p class="scrawl scrawl--r"><svg aria-hidden="true"><use href="#scribble"/></svg><span>every dollar in and out</span></p>
+
+    <div class="phone hero__phone">
+      <div class="phone__screen">
+        <span class="phone__island"></span>
+        <div class="sbar"><span>9:41</span><span class="sbar__r"><i></i><i></i><i></i></span></div>
+        <div class="scr is-on hero__scr">
+          <div class="a-top">
+            <span class="avatar kidav" data-initial>M</span>
+            <span class="a-who"><small>Parent Mode</small><b><span data-name>Meera</span>’s pocket</b></span>
+            <span class="a-iconbtn"><svg><use href="#i-bell"/></svg></span>
+          </div>
+          <div class="a-bal">
+            <small>Balance</small>
+            <b data-hero-bal>$42.00</b>
+            <span class="a-bal__delta"><svg><use href="#i-up"/></svg><span data-hero-week>+$12.00</span>&nbsp;this week</span>
+            <svg class="a-spark" viewBox="0 0 240 40" preserveAspectRatio="none"><path d="M0 34C22 33 34 27 56 28s36-9 60-7 34-11 58-9 40-8 66-9"/></svg>
+          </div>
+          <div class="a-tiles">
+            <div class="a-tile"><small>Saved</small><b>$10</b><span>Fixed Deposit</span></div>
+            <div class="a-tile"><small>Allowance</small><b>$10</b><span>every week</span></div>
+          </div>
+          <p class="a-label"><span>Entries</span><span>See all</span></p>
+          <ul class="a-entries" data-hero-entries>
+            <li class="entry"><span class="entry__ico in"><svg><use href="#i-cal"/></svg></span><span class="entry__t"><b>Weekly allowance</b><small>Allowance · Mon</small></span><b class="entry__a in">+$10.00</b></li>
+            <li class="entry"><span class="entry__ico out"><svg><use href="#i-bag"/></svg></span><span class="entry__t"><b>Pencil box</b><small>Spend</small></span><b class="entry__a">−$5.00</b></li>
+            <li class="entry"><span class="entry__ico in"><svg><use href="#i-check"/></svg></span><span class="entry__t"><b>Made the bed</b><small>Chore · Daily</small></span><b class="entry__a in">+$1.00</b></li>
+            <li class="entry"><span class="entry__ico lock"><svg><use href="#i-lock"/></svg></span><span class="entry__t"><b>Into Fixed Deposit</b><small>Investment · 14 days</small></span><b class="entry__a">−$10.00</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section class="why" data-why>
+  <div class="why__inner">
+    <p class="why__text" data-lit>
+      Kids learn about money by handling it. <span class="tok tok--coin" aria-hidden="true"><svg><use href="#coin"/></svg></span> But cash pocket money disappears without a trace. Nobody remembers what was <span class="tok tok--in" aria-hidden="true">+$10</span> given, what was <span class="tok tok--out" aria-hidden="true">−$3</span> spent, or what was <span class="tok tok--lock" aria-hidden="true"><svg><use href="#i-lock"/></svg>$10</span> saved.
+    </p>
+    <p class="why__text why__text--b" data-lit>
+      So you become the family bank, and <em>Pocket Cub keeps the record.</em> Your child gets their own view of it on the same phone, so money becomes something they can see, count and make choices about.
+    </p>
+  </div>
+</section>
+
+<!-- ================= TOUR ================= -->
+<section class="tour" id="how" data-tour data-mode="parent">
+  <div class="tour__pin">
+    <div class="tour__bg" aria-hidden="true"></div>
+    <div class="tour__grid">
+
+      <div class="tour__text">
+        <div class="bars" aria-label="Steps">
+          <div class="bars__group"><span class="bars__label">Set up</span><div class="bars__row">
+            <button type="button" class="bar" data-go="0" aria-label="Step 1: Set up your family"><i></i></button>
+            <button type="button" class="bar" data-go="1" aria-label="Step 2: Add your child"><i></i></button>
+            <button type="button" class="bar" data-go="2" aria-label="Step 3: Hand over the phone"><i></i></button>
+          </div></div>
+          <div class="bars__group bars__group--kid"><span class="bars__label">Kid Mode</span><div class="bars__row">
+            <button type="button" class="bar" data-go="3" aria-label="Step 4: Every dollar on the record"><i></i></button>
+            <button type="button" class="bar" data-go="4" aria-label="Step 5: Chores that pay"><i></i></button>
+            <button type="button" class="bar" data-go="5" aria-label="Step 6: Log a spend"><i></i></button>
+          </div></div>
+        </div>
+
+        <div class="tsteps">
+          <article class="tstep" data-tstep="0">
+            <p class="tstep__n">01</p>
+            <h2>Set up your family</h2>
+            <p>Sign in with your phone number or Google, name your family and pick a parent passcode.</p>
+            <p class="tstep__meta">Works with US (+1) and Indian (+91) numbers.</p>
+          </article>
+          <article class="tstep" data-tstep="1">
+            <p class="tstep__n">02</p>
+            <h2>Add your child</h2>
+            <p>Set a starting balance and an allowance, and choose whether their money earns interest (monthly, weekly or every few days) or stays as a simple balance.</p>
+            <p class="tstep__meta tstep__meta--try">Tap a colour on the phone. Each child gets their own.</p>
+          </article>
+          <article class="tstep" data-tstep="2">
+            <p class="tstep__n">03</p>
+            <h2>Hand over the phone</h2>
+            <p>Switch to Kid Mode. Your child sees their money, logs what they spend and ticks off their chores.</p>
+            <p class="tstep__meta">Kid Mode has its own soft mint look, so it’s always clear whose turn it is.</p>
+          </article>
+          <article class="tstep" data-tstep="3">
+            <p class="tstep__n">04</p>
+            <h2>Every dollar, on the record</h2>
+            <p>Set each child’s pocket money and starting balance. Every dollar in and out is recorded as an entry, so there’s always a clear history.</p>
+          </article>
+          <article class="tstep" data-tstep="4">
+            <p class="tstep__n">05</p>
+            <h2>Chores that pay</h2>
+            <p>Give each child chores with a reward: one-off, daily or weekly. When your child marks a chore done, the reward lands in their account straight away.</p>
+            <p class="tstep__meta tstep__meta--try">Tap a chore on the phone. Optional reminders nudge them at a time you choose.</p>
+          </article>
+          <article class="tstep" data-tstep="5">
+            <p class="tstep__n">06</p>
+            <h2>Log a spend</h2>
+            <p>When your child buys something, they log it themselves and see their balance before and after. Made a mistake? They can undo it right away.</p>
+            <p class="tstep__meta tstep__meta--try">Pick something and log it on the phone.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="tour__stage" data-stage>
+        <div class="tour__phonewrap" data-phonewrap>
+          <div class="phone tour__phone" data-phone role="group" aria-label="Pocket Cub app demo">
+            <div class="phone__screen">
+              <span class="phone__island"></span>
+              <div class="sbar"><span>9:41</span><span class="sbar__r"><i></i><i></i><i></i></span></div>
+
+              <div class="screens" data-screens>
+
+                <section class="scr" data-scr="signin">
+                  <div class="a-welcome">
+                    <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#cub"/></svg>
+                    <b>Welcome to Pocket Cub</b>
+                    <small>Sign in to set up your family.</small>
+                  </div>
+                  <p class="a-flabel">Phone number</p>
+                  <div class="a-field a-field--phone"><span class="a-cc">+1<svg><use href="#i-down"/></svg></span><span data-type="phone"></span><i class="a-caret"></i></div>
+                  <span class="a-btn" data-press="signin">Continue</span>
+                  <p class="a-or"><span>or</span></p>
+                  <span class="a-btn a-btn--ghost"><span class="a-g">G</span>Continue with Google</span>
+                </section>
+
+                <section class="scr" data-scr="family">
+                  <div class="a-nav"><span class="a-back"><svg><use href="#i-back"/></svg></span><span class="a-dots3"><i class="on"></i><i class="on"></i><i></i></span></div>
+                  <b class="a-h">Name your family</b>
+                  <p class="a-flabel">Family name</p>
+                  <div class="a-field"><span data-type="family"></span><i class="a-caret"></i></div>
+                  <span class="a-btn a-btn--end" data-press="family">Next</span>
+                </section>
+
+                <section class="scr" data-scr="setpass">
+                  <div class="a-nav"><span class="a-back"><svg><use href="#i-back"/></svg></span><span class="a-dots3"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+                  <span class="a-lock"><svg><use href="#i-lock"/></svg></span>
+                  <b class="a-h a-h--c">Pick a parent passcode</b>
+                  <small class="a-s a-s--c">You’ll need it to leave Kid Mode.</small>
+                  <div class="a-pdots" data-setdots><i></i><i></i><i></i><i></i></div>
+                  <div class="a-keys a-keys--mute" data-setkeys><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span></span><span>0</span><span><svg><use href="#i-del"/></svg></span></div>
+                </section>
+
+                <section class="scr" data-scr="child">
+                  <div class="a-nav"><span class="a-back"><svg><use href="#i-back"/></svg></span><b class="a-navt">Add a child</b></div>
+                  <span class="a-bigav kidav" data-initial>M</span>
+                  <div class="a-field a-field--kv"><small>Name</small><b data-name>Meera</b></div>
+                  <div class="a-colours" data-colours role="radiogroup" aria-label="Child colour">
+                    <button type="button" role="radio" style="--c:#BE7125" aria-label="Amber"></button>
+                    <button type="button" role="radio" style="--c:#2F7A45" aria-label="Green"></button>
+                    <button type="button" role="radio" style="--c:#85506F" aria-label="Plum"></button>
+                    <button type="button" role="radio" style="--c:#4F6F86" aria-label="Slate"></button>
+                    <button type="button" role="radio" style="--c:#B4533E" aria-label="Brick"></button>
+                    <button type="button" role="radio" style="--c:#7C6A2A" aria-label="Olive"></button>
+                  </div>
+                  <div class="a-two">
+                    <div class="a-field a-field--kv"><small>Starting balance</small><b>$40</b></div>
+                    <div class="a-field a-field--kv"><small>Allowance</small><b>$10 / week</b></div>
+                  </div>
+                  <p class="a-flabel">Interest</p>
+                  <div class="a-seg" data-seg role="radiogroup" aria-label="Interest">
+                    <span class="a-seg__thumb"></span>
+                    <button type="button" role="radio">Monthly</button>
+                    <button type="button" role="radio">Weekly</button>
+                    <button type="button" role="radio">Few days</button>
+                    <button type="button" role="radio">None</button>
+                  </div>
+                  <span class="a-btn a-btn--end"><span>Add <span data-name>Meera</span></span></span>
+                </section>
+
+                <section class="scr" data-scr="parenthome" data-tabbar="parent">
+                  <div class="a-top"><span class="a-who"><small>Parent Mode</small><b data-family>The Sharmas</b></span><span class="a-iconbtn"><svg><use href="#i-bell"/></svg></span></div>
+                  <div class="a-bal">
+                    <small>Family total</small><b>$107.50</b>
+                    <div class="a-kidrows">
+                      <span class="a-kidrow"><span class="avatar avatar--xs kidav" data-initial>M</span><span data-name>Meera</span><b>$42.00</b></span>
+                      <span class="a-kidrow"><span class="avatar avatar--xs" style="--c:#4F6F86">K</span>Kabir<b>$65.50</b></span>
+                    </div>
+                  </div>
+                  <div class="a-switchcard" data-kidswitch>
+                    <span class="a-switchcard__ico"><svg><use href="#i-lock"/></svg></span>
+                    <span><b>Kid Mode</b><small>Hand the phone to <span data-name>Meera</span></small></span>
+                    <span class="a-toggle"><i></i></span>
+                  </div>
+                  <div class="a-actions">
+                    <span><svg><use href="#i-cal"/></svg>Set allowance</span>
+                    <span><svg><use href="#i-jar"/></svg>New investment</span>
+                  </div>
+                </section>
+
+                <section class="scr scr--kid" data-scr="kidhome" data-tabbar="kid" data-tab="0">
+                  <div class="a-top">
+                    <span class="avatar kidav" data-initial>M</span>
+                    <span class="a-who"><small>Kid Mode</small><b>Hi, <span data-name>Meera</span>!</b></span>
+                    <span class="a-lockbadge"><svg><use href="#i-lock"/></svg></span>
+                  </div>
+                  <div class="a-bal a-bal--kid"><small>My money</small><b data-kidbal>$42.00</b><span class="a-bal__delta"><svg><use href="#i-cal"/></svg>$10 allowance every Monday</span></div>
+                  <p class="a-label"><span>My entries</span></p>
+                  <ul class="a-entries" data-kid-entries></ul>
+                </section>
+
+                <section class="scr scr--kid" data-scr="chores" data-tabbar="kid" data-tab="1">
+                  <div class="a-top"><span class="a-who"><small>Kid Mode</small><b>My chores</b></span><span class="a-balchip" data-chorebal>$42</span></div>
+                  <ul class="a-chores">
+                    <li><button type="button" class="a-chore" aria-pressed="false" data-reward="1"><span class="a-box"><svg><use href="#i-check"/></svg></span><span class="a-chore__t"><b>Make your bed</b><small>Daily</small></span><b class="a-chore__r">+$1</b></button></li>
+                    <li><button type="button" class="a-chore" aria-pressed="false" data-reward="2"><span class="a-box"><svg><use href="#i-check"/></svg></span><span class="a-chore__t"><b>Water the plants</b><small>Weekly</small></span><b class="a-chore__r">+$2</b></button></li>
+                    <li><button type="button" class="a-chore" aria-pressed="false" data-reward="5"><span class="a-box"><svg><use href="#i-check"/></svg></span><span class="a-chore__t"><b>Help wash the car</b><small>One-off</small></span><b class="a-chore__r">+$5</b></button></li>
+                  </ul>
+                  <div class="a-reminder"><span class="a-reminder__bell"><svg><use href="#i-bell"/></svg></span><span>Reminder every day at <b>6:00 pm</b></span></div>
+                </section>
+
+                <section class="scr scr--kid" data-scr="spend" data-tabbar="kid" data-tab="2">
+                  <div class="a-top"><span class="a-who"><small>Kid Mode</small><b>Log a spend</b></span></div>
+                  <p class="a-flabel">What did you buy?</p>
+                  <div class="a-items" data-items role="radiogroup" aria-label="Item">
+                    <button type="button" role="radio" aria-checked="true" data-price="3" data-item="Ice cream">Ice cream<b>$3</b></button>
+                    <button type="button" role="radio" aria-checked="false" data-price="4" data-item="Stickers">Stickers<b>$4</b></button>
+                    <button type="button" role="radio" aria-checked="false" data-price="6" data-item="Comic">Comic<b>$6</b></button>
+                  </div>
+                  <div class="a-ba">
+                    <span><small>Before</small><b data-before>$42.00</b></span>
+                    <svg><use href="#i-arrow"/></svg>
+                    <span class="a-ba__after"><small>After</small><b data-after>$39.00</b></span>
+                  </div>
+                  <div class="a-spendact">
+                    <button type="button" class="a-btn a-btn--green" data-log>Log it</button>
+                    <div class="a-toast" data-toast hidden>
+                      <span>Logged <b data-toastwhat>Ice cream −$3</b></span>
+                      <button type="button" data-undo><svg><use href="#i-undo"/></svg>Undo</button>
+                      <i class="a-toast__bar"></i>
+                    </div>
+                  </div>
+                  <p class="a-note" data-spendnote aria-live="polite"></p>
+                </section>
+
+              </div>
+
+              <nav class="tabbar tabbar--parent" aria-hidden="true"><span class="is-on"><svg><use href="#i-home"/></svg></span><span><svg><use href="#i-list"/></svg></span><span><svg><use href="#i-jar"/></svg></span><span><svg><use href="#i-users"/></svg></span></nav>
+              <nav class="tabbar tabbar--kid" aria-hidden="true"><i class="tabbar__pill"></i><span><svg><use href="#i-home"/></svg>Home</span><span><svg><use href="#i-list"/></svg>Chores</span><span><svg><use href="#i-bag"/></svg>Spend</span><span><svg><use href="#i-jar"/></svg>Savings</span></nav>
+            </div>
+          </div>
+          <img class="guide" data-guide src="explainericons/pointing-stick@3x.png" width="96" height="92" alt="">
+          <p class="scrawl scrawl--note" data-note aria-hidden="true"><svg><use href="#scribble"/></svg><span data-notetext>+1 or +91, or just use Google</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SAVINGS JAR ================= -->
+<section class="save" id="savings">
+  <div class="save__wrap">
+    <article class="card feat feat--invest reveal" data-invest>
+      <div class="feat__copy">
+        <span class="kicker"><svg><use href="#i-jar"/></svg>Investments</span>
+        <h3>Interest kids can actually watch.</h3>
+        <p>Create savings “instruments” like a Fixed Deposit or a College Fund. Lock money away for a set number of days at a rate you choose. When the lock ends, it comes back with interest on top.</p>
+
+        <div class="inst" role="radiogroup" aria-label="Instrument">
+          <button type="button" role="radio" aria-checked="true" data-inst="Fixed Deposit">Fixed Deposit</button>
+          <button type="button" role="radio" aria-checked="false" data-inst="College Fund">College Fund</button>
+        </div>
+
+        <div class="sliders">
+          <label class="sl">
+            <span class="sl__top"><span>Put in</span><output data-o="amt">$10</output></span>
+            <input type="range" min="5" max="200" step="5" value="10" data-i="amt">
+          </label>
+          <label class="sl">
+            <span class="sl__top"><span>Lock for</span><output data-o="days">14 days</output></span>
+            <input type="range" min="3" max="60" step="1" value="14" data-i="days">
+          </label>
+          <label class="sl">
+            <span class="sl__top"><span>Interest for the lock</span><output data-o="rate">5%</output></span>
+            <input type="range" min="1" max="20" step="1" value="5" data-i="rate">
+          </label>
+        </div>
+        <p class="note"><svg><use href="#i-cal"/></svg>Short locks let kids see interest working in weeks, not years.</p>
+      </div>
+
+      <div class="feat__vis invest">
+        <div class="jar-wrap">
+          <svg class="padlock" viewBox="0 0 48 56" data-padlock>
+            <path class="padlock__shackle" d="M14 26V16a10 10 0 0 1 20 0v10" fill="none" stroke="#6B6157" stroke-width="5" stroke-linecap="round"/>
+            <rect x="6" y="24" width="36" height="28" rx="8" fill="#BE7125"/>
+            <rect x="6" y="24" width="36" height="7" rx="3.5" fill="#D98B3A"/>
+            <circle cx="24" cy="38" r="4" fill="#2D251C"/><path d="M24 40v5" stroke="#2D251C" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <div class="jar-lid"></div>
+          <div class="jar">
+            <div class="jar__coins" data-jar-coins></div>
+            <span class="jar__label" data-jar-label>Fixed Deposit</span>
+            <span class="jar__shine"></span>
+          </div>
+          <span class="jar__plus" data-jar-plus>+$0.50</span>
+        </div>
+
+        <div class="payout" aria-live="polite">
+          <p class="payout__line"><span data-pay-in>$10.00</span><svg><use href="#i-arrow"/></svg><b data-pay-out>$10.50</b></p>
+          <small>back on <span data-pay-date>…</span> · <span class="green" data-pay-int>+$0.50 interest</span></small>
+        </div>
+
+        <div class="ff">
+          <div class="ff__bar"><i data-ff-bar></i></div>
+          <span class="ff__day" data-ff-day>Locked · day 0 of 14</span>
+        </div>
+        <button type="button" class="btn btn--amber" data-ff-btn><svg class="ico"><use href="#i-ff"/></svg><span data-ff-label>Fast-forward 14 days</span></button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= MODES ================= -->
+<section class="modes" id="modes" data-modes data-mode="parent">
+  <div class="modes__bg"></div>
+  <div class="modes__grid">
+    <div class="modes__copy">
+      <span class="tag reveal">Parent Mode vs Kid Mode</span>
+      <h2 class="reveal" style="--d:80ms">One phone.<br>Two very different views.</h2>
+
+      <div class="switch reveal" style="--d:160ms" role="tablist" aria-label="Choose a mode">
+        <span class="switch__thumb" aria-hidden="true"></span>
+        <button type="button" role="tab" id="tab-parent" aria-selected="true" aria-controls="panel-parent" data-tab="parent">Parent Mode</button>
+        <button type="button" role="tab" id="tab-kid" aria-selected="false" aria-controls="panel-kid" data-tab="kid">Kid Mode</button>
+      </div>
+
+      <div class="modes__panels reveal" style="--d:220ms">
+        <div class="mpanel" id="panel-parent" role="tabpanel" aria-labelledby="tab-parent" data-panel="parent">
+          <p class="mpanel__lead">Full control</p>
+          <ul class="ticks">
+            <li>Set allowances, interest rates and rules</li>
+            <li>Create investments and put money into them</li>
+            <li>Add chores and rewards</li>
+            <li>See the family total, each child’s balance and recent activity</li>
+            <li>Manage children, passcode and account</li>
+          </ul>
+        </div>
+        <div class="mpanel" id="panel-kid" role="tabpanel" aria-labelledby="tab-kid" data-panel="kid" hidden>
+          <p class="mpanel__lead">See and learn</p>
+          <ul class="ticks">
+            <li>See their total, entries and investments</li>
+            <li>Log their own spends</li>
+            <li>Tick off their own chores and get rewarded</li>
+            <li class="no">Cannot change rules, move money into investments or reach parent screens</li>
+          </ul>
+        </div>
+      </div>
+      <p class="modes__note reveal" style="--d:280ms"><svg><use href="#i-lock"/></svg><span>Kid Mode has its own soft mint look, so it’s always clear whose turn it is. Leaving it takes the parent’s 4-digit passcode, even after the app is closed and reopened.</span></p>
+    </div>
+
+    <div class="modes__stage reveal" style="--d:120ms">
+      <div class="flip" data-flip>
+        <div class="phone flip__face flip__face--parent">
+          <div class="phone__screen">
+            <span class="phone__island"></span>
+            <div class="sbar"><span>9:41</span><span class="sbar__r"><i></i><i></i><i></i></span></div>
+            <div class="app">
+              <div class="app__top">
+                <span class="app__who"><small>Parent Mode</small><b data-family>The Sharmas</b></span>
+                <span class="app__iconbtn"><svg><use href="#i-lock"/></svg></span>
+              </div>
+              <div class="bal">
+                <small>Family total</small>
+                <p class="bal__num">$107.50</p>
+                <div class="pkids">
+                  <span class="pkid"><span class="avatar avatar--xs kidav" data-initial>M</span><span data-name>Meera</span><b>$42.00</b></span>
+                  <span class="pkid"><span class="avatar avatar--xs" style="--c:#4F6F86">K</span>Kabir<b>$65.50</b></span>
+                </div>
+              </div>
+              <div class="app__label"><span>Quick actions</span></div>
+              <div class="pactions">
+                <span><svg><use href="#i-cal"/></svg>Set allowance</span>
+                <span><svg><use href="#i-jar"/></svg>New investment</span>
+                <span><svg><use href="#i-list"/></svg>Add chore</span>
+                <span><svg><use href="#i-users"/></svg>Children</span>
+              </div>
+              <div class="app__label"><span>Recent activity</span></div>
+              <div class="prules">
+                <span>Kabir spent on stickers<b>−$4</b></span>
+                <span><span><span data-name>Meera</span> watered the plants</span><b class="green">+$2</b></span>
+              </div>
+            </div>
+            <div class="mtabbar"><span class="is-on"><svg><use href="#i-home"/></svg></span><span><svg><use href="#i-list"/></svg></span><span><svg><use href="#i-jar"/></svg></span><span><svg><use href="#i-users"/></svg></span></div>
+          </div>
+        </div>
+        <div class="phone flip__face flip__face--kid">
+          <div class="phone__screen phone__screen--kid">
+            <span class="phone__island"></span>
+            <div class="sbar"><span>9:41</span><span class="sbar__r"><i></i><i></i><i></i></span></div>
+            <div class="app">
+              <div class="app__top">
+                <span class="avatar kidav" data-initial>M</span>
+                <span class="app__who"><small>Kid Mode</small><b>Hi, <span data-name>Meera</span>!</b></span>
+                <img class="app__cub" src="explainericons/pointing@2x.png" width="96" height="102" alt="">
+              </div>
+              <div class="bal bal--kid">
+                <small>My money</small>
+                <p class="bal__num">$42.00</p>
+                <p class="bal__delta"><svg><use href="#i-up"/></svg>+$1.00&nbsp;from chores today</p>
+              </div>
+              <div class="app__label"><span>My chores</span></div>
+              <ul class="kchores">
+                <li class="is-done"><span class="kbox"><svg><use href="#i-check"/></svg></span>Make your bed<b>+$1</b></li>
+                <li><span class="kbox"></span>Water the plants<b>+$2</b></li>
+                <li><span class="kbox"></span>Feed the dog<b>+$1</b></li>
+              </ul>
+              <div class="app__label"><span>My investments</span></div>
+              <div class="kinv">
+                <span class="kinv__top"><b>Fixed Deposit</b><span>$10 → <b class="green">$10.50</b></span></span>
+                <span class="kinv__bar"><i></i></span>
+                <small>6 days to go</small>
+              </div>
+              <span class="kbtn">Log a spend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passcode" data-passcode hidden>
+        <div class="passcode__card" role="dialog" aria-modal="true" aria-labelledby="pc-title" aria-describedby="pc-hint">
+          <div class="pc-cub" data-pc-cub>
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle cx="28" cy="30" r="18" fill="#A9653A"/><circle cx="92" cy="30" r="18" fill="#A9653A"/>
+              <circle cx="28" cy="30" r="9.5" fill="#F4DEC4"/><circle cx="92" cy="30" r="9.5" fill="#F4DEC4"/>
+              <ellipse cx="60" cy="68" rx="47" ry="43" fill="#B06D3E"/>
+              <ellipse cx="60" cy="54" rx="32" ry="20" fill="#BC7A48" opacity=".55"/>
+              <ellipse cx="60" cy="84" rx="20" ry="15.5" fill="#F4DEC4"/>
+              <ellipse cx="60" cy="77" rx="7.5" ry="5.2" fill="#2D251C"/>
+              <ellipse cx="57.5" cy="75.6" rx="2.2" ry="1.3" fill="#fff" opacity=".6"/>
+              <path d="M53.5 86q6.5 5.5 13 0" stroke="#2D251C" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <g class="pc-eyes">
+                <ellipse cx="40" cy="63" rx="5.2" ry="6"/><ellipse cx="80" cy="63" rx="5.2" ry="6"/>
+                <circle cx="41.8" cy="60.8" r="1.8" fill="#fff"/><circle cx="81.8" cy="60.8" r="1.8" fill="#fff"/>
+              </g>
+              <g class="pc-happy"><path d="M34 64q6-7 12 0M74 64q6-7 12 0" stroke="#2D251C" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+              <ellipse cx="29" cy="80" rx="7" ry="4.5" fill="#EE8B6F" opacity=".75"/><ellipse cx="91" cy="80" rx="7" ry="4.5" fill="#EE8B6F" opacity=".75"/>
+              <g class="pc-paws">
+                <g class="pc-paw pc-paw--l"><ellipse cx="40" cy="138" rx="17" ry="15" fill="#9A5A32"/><ellipse cx="40" cy="141" rx="8" ry="6" fill="#F4DEC4"/><circle cx="31" cy="131" r="3" fill="#F4DEC4"/><circle cx="40" cy="128" r="3" fill="#F4DEC4"/><circle cx="49" cy="131" r="3" fill="#F4DEC4"/></g>
+                <g class="pc-paw pc-paw--r"><ellipse cx="80" cy="138" rx="17" ry="15" fill="#9A5A32"/><ellipse cx="80" cy="141" rx="8" ry="6" fill="#F4DEC4"/><circle cx="71" cy="131" r="3" fill="#F4DEC4"/><circle cx="80" cy="128" r="3" fill="#F4DEC4"/><circle cx="89" cy="131" r="3" fill="#F4DEC4"/></g>
+              </g>
+            </svg>
+            <span class="pc-bubble" data-pc-bubble>I’m not looking!</span>
+          </div>
+          <p class="pc-title" id="pc-title">Enter parent passcode</p>
+          <p class="pc-hint" id="pc-hint">It’s a demo, so the passcode is <b>1 2 3 4</b></p>
+          <div class="pc-dots" data-pc-dots><i></i><i></i><i></i><i></i></div>
+          <div class="pc-keys">
+            <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button><button type="button" data-k="3">3</button>
+            <button type="button" data-k="4">4</button><button type="button" data-k="5">5</button><button type="button" data-k="6">6</button>
+            <button type="button" data-k="7">7</button><button type="button" data-k="8">8</button><button type="button" data-k="9">9</button>
+            <button type="button" class="pc-key--muted" data-k="cancel">Cancel</button><button type="button" data-k="0">0</button><button type="button" class="pc-key--muted" data-k="del" aria-label="Delete"><svg><use href="#i-del"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <p class="modes__try" data-modes-try>Try it: switch to Kid Mode, then back.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SAFETY ================= -->
+<section class="trust" id="safety">
+  <div class="trust__head">
+    <h2 class="reveal">You stay the bank.</h2>
+    <p class="reveal" style="--d:.1s">Pocket Cub never moves real money. You hand over cash or pay as you normally would, and the app keeps the record.</p>
+  </div>
+  <dl class="trust__rows" data-stamps>
+    <div class="trow"><dt>Card needed</dt><dd><span class="stamp">No</span></dd></div>
+    <div class="trow"><dt>Bank link</dt><dd><span class="stamp">None</span></dd></div>
+    <div class="trow"><dt>Fees</dt><dd><span class="stamp stamp--amber">$0</span></dd></div>
+    <div class="trow"><dt>Accounts for kids</dt><dd><span class="stamp">Never needed</span></dd></div>
+    <div class="trow"><dt>Parent Mode</dt><dd><span class="stamp stamp--brown">Passcode</span></dd></div>
+    <div class="trow"><dt>Family data</dt><dd><span class="stamp stamp--brown">Private to you</span></dd></div>
+    <div class="trow"><dt>Delete your account</dt><dd><span class="stamp stamp--brown">Any time</span></dd></div>
+  </dl>
+</section>
+
+<!-- ================= QUESTIONS ================= -->
+<section class="chat" id="faq">
+  <div class="chat__grid">
+    <div class="chat__side">
+      <h2 class="reveal">Parents ask.<br>Cub answers.</h2>
+      <img class="chat__cub reveal" style="--d:.1s" src="explainericons/investing@2x.png"
+           srcset="explainericons/investing.png 112w, explainericons/investing@2x.png 224w, explainericons/investing@3x.png 336w"
+           sizes="190px" width="112" height="115" alt="Cub holding a chart with an arrow going up">
+    </div>
+    <div class="thread" data-thread>
+      <div class="msg msg--q"><div class="bubble"><p>Is real money moved through the app?</p></div></div>
+      <div class="msg msg--a"><div class="bubble"><p>No. Pocket Cub is a shared record between you and your child. You hand over cash or pay as you normally would, and the app keeps track.</p></div></div>
+      <div class="msg msg--q"><div class="bubble"><p>Does my child need their own phone?</p></div></div>
+      <div class="msg msg--a"><div class="bubble"><p>No. Kid Mode runs on your phone, and a passcode keeps Parent Mode locked.</p></div></div>
+      <div class="msg msg--q"><div class="bubble"><p>Who pays the interest?</p></div></div>
+      <div class="msg msg--a"><div class="bubble"><p>You do. You decide the rate and the lock period, a bit like being your child’s own bank.</p></div></div>
+      <div class="msg msg--q"><div class="bubble"><p>Can I have more than one child?</p></div></div>
+      <div class="msg msg--a"><div class="bubble"><p>Yes. Add as many as you like, each with their own account.</p></div></div>
+      <div class="msg msg--q"><div class="bubble"><p>What age is it for?</p></div></div>
+      <div class="msg msg--a"><div class="bubble"><p>Roughly 5 to 14: kids learning to save, spend and earn with real numbers, not lectures. It works in US dollars and other currencies, and you can sign in with a US (+1) or Indian (+91) number, or Google.</p></div></div>
+      <div class="msg msg--q"><div class="bubble"><p>Is it free?</p></div></div>
+      <div class="msg msg--a"><div class="bubble"><p>Yes. No card and no fees.</p></div></div>
+      <div class="msg msg--q"><div class="bubble"><p>Which phones does it work on?</p></div></div>
+      <div class="msg msg--a"><div class="bubble"><p>Android now, iPhone coming soon.</p></div></div>
+      <div class="msg msg--q"><div class="bubble"><p>What’s next?</p></div></div>
+      <div class="msg msg--a"><div class="bubble"><p>A few things on the way:</p><ul><li>The iPhone app</li><li>Inviting a co-parent to manage the family together</li><li>A web dashboard for parents</li><li>More kinds of savings tools</li></ul></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= END ================= -->
+<section class="end">
+  <div class="end__copy">
+    <h2 class="reveal">Ready when <span class="amber" data-name>Meera</span> is.</h2>
+    <p class="reveal" style="--d:.1s">Pocket money, tracked between you and your child. No card, no fees.</p>
+    <div class="end__cta reveal" style="--d:.2s">
+      <a class="btn btn--play" data-play href="#">
+        <svg class="btn__play" aria-hidden="true"><use href="#i-play"/></svg>
+        <span class="btn__stack"><small>Get it on</small><span>Google Play</span></span>
+      </a>
+      <span class="end__ios">iPhone coming soon</span>
+    </div>
+  </div>
+  <div class="pocket" aria-hidden="true">
+    <div class="pocket__rain">
+      <svg style="--x:22%;--t:3.2s;--dl:0s"><use href="#coin"/></svg>
+      <svg style="--x:44%;--t:3.6s;--dl:1.1s"><use href="#coin"/></svg>
+      <svg style="--x:64%;--t:3s;--dl:.5s"><use href="#coin-green"/></svg>
+      <svg style="--x:80%;--t:3.4s;--dl:1.8s"><use href="#coin"/></svg>
+      <svg style="--x:34%;--t:3.3s;--dl:2.4s"><use href="#coin"/></svg>
+    </div>
+    <div class="pocket__back"></div>
+    <img class="pocket__cub" src="explainericons/happy@2x.png"
+         srcset="explainericons/happy.png 170w, explainericons/happy@2x.png 340w, explainericons/happy@3x.png 510w"
+         sizes="260px" width="170" height="183" alt="">
+    <div class="pocket__front"><span class="pocket__tag">Pocket Cub</span></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <a href="#top" class="brand" aria-label="Pocket Cub, back to top">
+    <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#cub"/></svg>
+    <span>Pocket Cub</span>
+  </a>
+  <nav class="foot__links" aria-label="Footer">
+    <a href="#how">How it works</a>
+    <a href="#safety">Safety</a>
+    <a href="#faq">Questions</a>
+    <a href="#" data-todo="privacy">Privacy policy</a>
+    <a href="#" data-todo="terms">Terms of use</a>
+    <a href="#" data-todo="delete">Delete your account</a>
+  </nav>
+  <p class="foot__c">© <span data-year>2026</span> Pocket Cub. Built India-first.</p>
+</footer>
+
+</body>
+</html>
